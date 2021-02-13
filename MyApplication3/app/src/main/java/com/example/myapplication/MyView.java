@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Point;
+import android.graphics.PointF;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -16,6 +18,8 @@ public class MyView extends View {
     int width;
     int size=30;
     float density;
+    PointF[] points = new PointF[10];
+    Canvas canvas;
 
     public MyView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -26,6 +30,7 @@ public class MyView extends View {
     @Override
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);
+        this.canvas=canvas;
         //canvas.drawColor(Color.RED);
         height=canvas.getHeight();
         width=canvas.getWidth();
@@ -52,10 +57,21 @@ public class MyView extends View {
         }
 
     }
+    void drawPoints(){
+        Paint paint= new Paint();
+        PointF pointF= points[0];
+        paint.setColor(Color.RED);
+        canvas.drawCircle(pointF.x,pointF.y,20,paint);
+    }
     @Override
     public boolean onTouchEvent(MotionEvent event){
-        // return super.OnTouchEvent(event);
-        Log.i("touch",event.getAction()+ "");
+        if(event.getAction()==MotionEvent.ACTION_DOWN){
+            float x= event.getX();
+            float y= event.getY();
+            points[0]= new PointF(x,y);
+            this.invalidate();
+            //drawPoints();
+        }
         return true;
     }
 }
