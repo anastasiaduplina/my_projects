@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="draw">Draw  </string>
+    <string name="move">Move  </string>
+    <string name="circle">Circle  </string>
+    <string name="triangle">Triangle  </string>
+    <string name="square">Square  </string>
+    <string name="undo">Undo</string>
+    <string-array name="colours">
+        <item>000000</item>
+        <item>ff0000</item>
+        <item>00ff00</item>
+        <item>0000ff</item>
+    </string-array>
+</resources>
