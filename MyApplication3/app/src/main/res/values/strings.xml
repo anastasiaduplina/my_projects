@@ -4,7 +4,7 @@
     <string name="move">Move  </string>
     <string name="circle">Circle  </string>
     <string name="triangle">Triangle  </string>
-    <string name="square">Square  </string>
+    <string name="rect">Rect  </string>
     <string name="undo">Undo</string>
     <string-array name="colours">
         <item>000000</item>

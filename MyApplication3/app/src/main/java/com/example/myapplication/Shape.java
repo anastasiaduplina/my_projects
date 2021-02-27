@@ -3,12 +3,13 @@ package com.example.myapplication;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-public class Shape {
+abstract public class Shape {
     String color;
-    Shape(String color){
-        this.color=color;
-    }
-    void draw(Canvas canvas, Paint paint){
 
+    Shape(String color){
+       this.color=color;
     }
+    abstract void draw(Canvas canvas, Paint paint);
+
+
 }

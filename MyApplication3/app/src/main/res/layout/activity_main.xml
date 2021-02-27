@@ -50,10 +50,10 @@
             android:text="@string/triangle" />
 
         <RadioButton
-            android:id="@+id/square"
+            android:id="@+id/rect"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/square" />
+            android:text="@string/rect" />
     </RadioGroup>
 
     <Spinner

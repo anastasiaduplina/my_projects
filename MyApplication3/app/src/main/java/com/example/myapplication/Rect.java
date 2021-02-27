@@ -11,7 +11,7 @@ public class Rect extends Shape {
     PointF cornerRB;
     public Rect ( String color, PointF cornerLT, PointF cornerRB){
         super(color);
-        this.color=color;
+
         this.cornerLT=cornerLT;
         this.cornerRB=cornerRB;
     }
