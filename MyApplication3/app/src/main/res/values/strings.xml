@@ -6,10 +6,16 @@
     <string name="triangle">Triangle  </string>
     <string name="rect">Rect  </string>
     <string name="undo">Undo</string>
-    <string-array name="colours">
+    <string-array name="coloursnum">
         <item>000000</item>
         <item>ff0000</item>
         <item>00ff00</item>
         <item>0000ff</item>
+    </string-array>
+    <string-array name="colours">
+        <item>black</item>
+        <item>red</item>
+        <item>green</item>
+        <item>blue</item>
     </string-array>
 </resources>
