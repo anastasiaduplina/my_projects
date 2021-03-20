@@ -19,13 +19,14 @@
             android:id="@+id/previousBtn"
             android:background="@mipmap/back"
             android:layout_margin="10dp"
-            />
+            android:contentDescription="@string/todo" />
        <TextView
-           android:layout_width="wrap_content"
+           android:layout_width="0dp"
            android:layout_height="wrap_content"
            android:gravity="center"
            android:layout_marginTop="4dp"
-           android:text="CurrentDate"
+           android:text="@string/currentdate"
+           android:id="@+id/current_Date"
            android:textColor="@color/white"
            android:textStyle="bold"
            android:textSize="18sp"
@@ -37,7 +38,7 @@
             android:id="@+id/nextBtn"
             android:background="@mipmap/next"
             android:layout_margin="10dp"
-            />
+            android:contentDescription="@string/todo" />
 
     </LinearLayout>
     <LinearLayout
@@ -52,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Mon"
+            android:text="@string/mon"
             android:background="@color/white"
             android:textColor="@color/black"
             android:layout_marginTop="4dp"
@@ -63,7 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Tue"
+            android:text="@string/tue"
             android:background="@color/white"
             android:textColor="@color/black"
             android:layout_marginTop="4dp"
@@ -74,7 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Wed"
+            android:text="@string/wed"
             android:background="@color/white"
             android:textColor="@color/black"
             android:layout_marginTop="4dp"
@@ -85,7 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Thu"
+            android:text="@string/thu"
             android:background="@color/white"
             android:textColor="@color/black"
             android:layout_marginTop="4dp"
@@ -96,7 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Fri"
+            android:text="@string/fri"
             android:background="@color/white"
             android:textColor="@color/black"
             android:layout_marginTop="4dp"
@@ -107,7 +108,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Sat"
+            android:text="@string/sat"
             android:background="@color/white"
             android:textColor="@color/black"
             android:layout_marginTop="4dp"
@@ -118,7 +119,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Sun"
+            android:text="@string/sun"
             android:background="@color/white"
             android:textColor="@color/black"
             android:layout_marginTop="4dp"
@@ -129,7 +130,7 @@
     <GridView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/grindview"
+        android:id="@+id/gridview"
         android:numColumns="7"
         ></GridView>
 </LinearLayout>
