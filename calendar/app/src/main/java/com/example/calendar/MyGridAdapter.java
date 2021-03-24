@@ -32,7 +32,7 @@ public class MyGridAdapter extends ArrayAdapter {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         Date monthDate= dates(position);
         Calendar dateCalendar= Calendar.getInstance();
-        dateCalendar.setTime(monthDate);
+        dateCalendar.setTime(monthDate);//26:00
         int DayNo = dateCalendar.get(Calendar.DAY_OF_MONTH);
         int displayMonth = dateCalendar.get(Calendar.MONTH)+1;
         int displayYear = dateCalendar.get(Calendar.YEAR);
@@ -43,14 +43,14 @@ public class MyGridAdapter extends ArrayAdapter {
             view=inflater.inflate(R.layout.single_cell_Layout,null);
         }
         if (displayMonth == currentMonth && displayYear==currentYear){
-            view.setBackgroundColor(getContext().getResources().getColor(R.color.green);
+            view.setBackgroundColor(getContext().getResources().getColor(R.color.green);// https://github.com/roomorama/Caldroid
         }else{
             view.setBackgroundColor(Color.parseColor(#cccccc));
         }
         TextView day_Number = convertView.findViewById(R.id.calendar_day);
         Day_Number.setText(String.valueOf(DayNo));
          
-        return convertView;//19:00
+        return convertView;
     }
 
     @Override
