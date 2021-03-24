@@ -1,10 +1,13 @@
 package com.example.calendar;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,7 +33,7 @@ public class MyGridAdapter extends ArrayAdapter {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        Date monthDate= dates(position);
+        Date monthDate = dates.get(position);
         Calendar dateCalendar= Calendar.getInstance();
         dateCalendar.setTime(monthDate);//26:00
         int DayNo = dateCalendar.get(Calendar.DAY_OF_MONTH);
@@ -40,17 +43,19 @@ public class MyGridAdapter extends ArrayAdapter {
         int currentYear = currentDate.get(Calendar.YEAR);
         View view= convertView;
         if(view== null){
-            view=inflater.inflate(R.layout.single_cell_Layout,null);
+            view=inflater.inflate(R.layout.single_cell_layout,parent,false);
         }
         if (displayMonth == currentMonth && displayYear==currentYear){
-            view.setBackgroundColor(getContext().getResources().getColor(R.color.green);// https://github.com/roomorama/Caldroid
+            view.setBackgroundColor(getContext().getResources().getColor(R.color.green));
+            //view.setBackground// https://github.com/roomorama/Caldroid
         }else{
-            view.setBackgroundColor(Color.parseColor(#cccccc));
+            view.setBackgroundColor(Color.parseColor("#CCCCCC"));
         }
-        TextView day_Number = convertView.findViewById(R.id.calendar_day);
+        TextView Day_Number = view.findViewById(R.id.calendar_day);
         Day_Number.setText(String.valueOf(DayNo));
+
          
-        return convertView;
+        return view;
     }
 
     @Override

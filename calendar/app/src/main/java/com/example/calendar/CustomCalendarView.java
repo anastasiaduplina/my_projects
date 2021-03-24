@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -38,12 +39,14 @@ public class CustomCalendarView extends LinearLayout {
     private static final int MAX_CALENDAR_DAYS= 42;
     Calendar calendar=Calendar.getInstance(Locale.ENGLISH);
     Context context;
+    SimpleDateFormat datedateFormat= new SimpleDateFormat("dd", Locale.ENGLISH);
     SimpleDateFormat dateFormat= new SimpleDateFormat("MMMM yyyy", Locale.ENGLISH);
     SimpleDateFormat monthFormat = new SimpleDateFormat("MMMM", Locale.ENGLISH);
     SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy",Locale.ENGLISH);
+
+    MyGridAdapter myGridAdapter;
     AlertDialog alertDialog;
     List<Date> dates = new ArrayList<>();
-
     List <Events> eventsList= new ArrayList<>();
 
     public CustomCalendarView(Context context) {
@@ -111,6 +114,7 @@ public class CustomCalendarView extends LinearLayout {
                     @Override
                     public void onClick(View v) {
                         SaveEvent(EventName.getText().toString(), EventTime.getText().toString(),date,month,year);
+                        //Log.i("ddate", date+"");
                         SetUpCalendar();
                         alertDialog.dismiss();
                     }
@@ -133,7 +137,7 @@ public class CustomCalendarView extends LinearLayout {
         dbOpenHelper.close();
         Toast.makeText(context,"Event Saved", Toast.LENGTH_SHORT).show();
 
-
+//getView
     }
 
     private void IntializeLaoyut (){
@@ -146,9 +150,9 @@ public class CustomCalendarView extends LinearLayout {
 
     }
     private void SetUpCalendar () {
-        String currwntDate = dateFormat.format(calendar.getTime());
-        Log.i("date",currwntDate+"");
-        CurrentDate.setText(currwntDate);
+        String currentDate = dateFormat.format(calendar.getTime());
+        Log.i("date",currentDate+"");
+        CurrentDate.setText(currentDate);
         dates.clear();
         Calendar monthCalendar= (Calendar)calendar.clone();
         monthCalendar.set(Calendar.DAY_OF_MONTH,1);
@@ -158,9 +162,12 @@ public class CustomCalendarView extends LinearLayout {
             dates.add(monthCalendar.getTime());
             monthCalendar.add(Calendar.DAY_OF_MONTH,1);
         }
-
+        myGridAdapter= new MyGridAdapter(context, dates, calendar, eventsList);
+         gridView.setAdapter(myGridAdapter);
 
     }
+
+
 
 }
 
