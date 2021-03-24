@@ -30,22 +30,42 @@ public class MyGridAdapter extends ArrayAdapter {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        return super.getView(position, convertView, parent);//19:00
+        Date monthDate= dates(position);
+        Calendar dateCalendar= Calendar.getInstance();
+        dateCalendar.setTime(monthDate);
+        int DayNo = dateCalendar.get(Calendar.DAY_OF_MONTH);
+        int displayMonth = dateCalendar.get(Calendar.MONTH)+1;
+        int displayYear = dateCalendar.get(Calendar.YEAR);
+        int currentMonth = currentDate.get(Calendar.MONTH)+1;
+        int currentYear = currentDate.get(Calendar.YEAR);
+        View view= convertView;
+        if(view== null){
+            view=inflater.inflate(R.layout.single_cell_Layout,null);
+        }
+        if (displayMonth == currentMonth && displayYear==currentYear){
+            view.setBackgroundColor(getContext().getResources().getColor(R.color.green);
+        }else{
+            view.setBackgroundColor(Color.parseColor(#cccccc));
+        }
+        TextView day_Number = convertView.findViewById(R.id.calendar_day);
+        Day_Number.setText(String.valueOf(DayNo));
+         
+        return convertView;//19:00
     }
 
     @Override
     public int getCount() {
-        return super.getCount();
+        return dates.size();
     }
 
     @Override
     public int getPosition(@Nullable Object item) {
-        return super.getPosition(item);
+        return dates.indexOf(item);
     }
 
     @Nullable
     @Override
     public Object getItem(int position) {
-        return super.getItem(position);
+        return dates.get(position);
     }
 }
