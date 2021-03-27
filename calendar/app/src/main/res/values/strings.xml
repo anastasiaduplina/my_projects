@@ -9,5 +9,9 @@
     <string name="sun">Sun</string>
     <string name="thu">Thu</string>
     <string name="todo">TODO</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_1">1</string>
+    <string name="close">Close</string>
 
 </resources>

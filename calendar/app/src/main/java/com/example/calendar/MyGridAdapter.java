@@ -39,17 +39,27 @@ public class MyGridAdapter extends ArrayAdapter {
         int DayNo = dateCalendar.get(Calendar.DAY_OF_MONTH);
         int displayMonth = dateCalendar.get(Calendar.MONTH)+1;
         int displayYear = dateCalendar.get(Calendar.YEAR);
+        int currentDay = currentDate.get(Calendar.DAY_OF_MONTH);
         int currentMonth = currentDate.get(Calendar.MONTH)+1;
         int currentYear = currentDate.get(Calendar.YEAR);
+        int a=1;
         View view= convertView;
+        //view.getMatrix().
         if(view== null){
             view=inflater.inflate(R.layout.single_cell_layout,parent,false);
         }
+
+
         if (displayMonth == currentMonth && displayYear==currentYear){
             view.setBackgroundColor(getContext().getResources().getColor(R.color.green));
             //view.setBackground// https://github.com/roomorama/Caldroid
         }else{
             view.setBackgroundColor(Color.parseColor("#CCCCCC"));
+        }
+
+        if (DayNo == 15&& displayMonth==3){
+            view.setBackgroundColor(getContext().getResources().getColor(R.color.purple_500));
+
         }
         TextView Day_Number = view.findViewById(R.id.calendar_day);
         Day_Number.setText(String.valueOf(DayNo));
