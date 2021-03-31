@@ -36,6 +36,17 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         contentValues.put(DBStructure.YEAR, year);
        database.insert(DBStructure.EVENT_TABLE_NAME, null, contentValues);
     }
+
+    public void SaveMood (String mood,  String date, String month, String year, SQLiteDatabase database){
+        ContentValues contentValues= new ContentValues();
+        contentValues.put(DBStructure.EVENT, mood);
+        //contentValues.put(DBStructure.TIME, time);
+        contentValues.put(DBStructure.DATE, date);
+        contentValues.put(DBStructure.MONTH, month);
+        contentValues.put(DBStructure.YEAR, year);
+        database.insert(DBStructure.EVENT_TABLE_NAME, null, contentValues);
+    }
+
     public Cursor ReadEvents(String date, SQLiteDatabase database){
         String [] Projections = {DBStructure.EVENT, DBStructure.TIME,DBStructure.DATE, DBStructure.MONTH, DBStructure.YEAR};
         String Selection = DBStructure.DATE + "=?";
