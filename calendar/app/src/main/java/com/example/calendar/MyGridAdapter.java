@@ -62,10 +62,10 @@ public class MyGridAdapter extends ArrayAdapter {
             view.setBackgroundColor(Color.parseColor("#CCCCCC"));
         }
 
-        if (DayNo == 15&& displayMonth==3){
-            view.setBackgroundColor(getContext().getResources().getColor(R.color.purple_500));
-
-        }
+//        if (DayNo == 15&& displayMonth==3){
+//            view.setBackgroundColor(getContext().getResources().getColor(R.color.purple_500));
+//
+//        }
         TextView Day_Number = view.findViewById(R.id.calendar_day);
         TextView EventNumber = view.findViewById(R.id.events_id);
         Day_Number.setText(String.valueOf(DayNo));
@@ -77,7 +77,8 @@ public class MyGridAdapter extends ArrayAdapter {
             && displayYear==eventCalendar.get(Calendar.YEAR)){
                 arrayList.add(events.get(i).getEVENT());
                 //EventNumber.setText(arrayList.size()+" Events");
-                EventNumber.setText(" mood");
+                //EventNumber.setText(" mood");
+                view.setBackgroundColor(getContext().getResources().getColor(R.color.purple_500));
             }
         }
 

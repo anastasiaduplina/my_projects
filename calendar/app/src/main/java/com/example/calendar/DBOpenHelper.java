@@ -9,8 +9,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 public class DBOpenHelper extends SQLiteOpenHelper {
-    private static final String CREATE_EVENT_TABLE= "create table " + DBStructure.EVENT_TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + DBStructure.EVENT + " TEXT, "+DBStructure.TIME+ " TEXT, "+DBStructure.DATE+ " TEXT, "+DBStructure.MONTH+ " TEXT, "+DBStructure.YEAR+ " TEXT)" ;
+//    private static final String CREATE_EVENT_TABLE= "create table " + DBStructure.EVENT_TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, "
+//            + DBStructure.EVENT + " TEXT, "+DBStructure.TIME+ " TEXT, "+DBStructure.DATE+ " TEXT, "+DBStructure.MONTH+ " TEXT, "+DBStructure.YEAR+ " TEXT)" ;
+    private static final String CREATE_EVENT_TABLE= "create table " + DBStructure.EVENT_TABLE_NAME + DBStructure.ID +"(ID INTEGER PRIMARY KEY , "
+            + DBStructure.EVENT + " TEXT, "+DBStructure.DATE+ " TEXT, "+DBStructure.MONTH+ " TEXT, "+DBStructure.YEAR+ " TEXT)" ;
     private static final String DROP_EVENTS_TABLE="DROP TABLE IF EXISTS "+ DBStructure.EVENT_TABLE_NAME;
 
     public DBOpenHelper(@Nullable Context context) {
@@ -27,20 +29,20 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         db.execSQL(DROP_EVENTS_TABLE);
         onCreate(db);
     }
-    public void SaveEvent (String event, String time, String date, String month, String year, SQLiteDatabase database){
-        ContentValues contentValues= new ContentValues();
-        contentValues.put(DBStructure.EVENT, event);
-        contentValues.put(DBStructure.TIME, time);
-        contentValues.put(DBStructure.DATE, date);
-        contentValues.put(DBStructure.MONTH, month);
-        contentValues.put(DBStructure.YEAR, year);
-       database.insert(DBStructure.EVENT_TABLE_NAME, null, contentValues);
-    }
+//    public void SaveEvent (String event, String time, String date, String month, String year, SQLiteDatabase database){
+//        ContentValues contentValues= new ContentValues();
+//        contentValues.put(DBStructure.EVENT, event);
+//        contentValues.put(DBStructure.TIME, time);
+//        contentValues.put(DBStructure.DATE, date);
+//        contentValues.put(DBStructure.MONTH, month);
+//        contentValues.put(DBStructure.YEAR, year);
+//       database.insert(DBStructure.EVENT_TABLE_NAME, null, contentValues);
+//    }
 
-    public void SaveMood (String mood,  String date, String month, String year, SQLiteDatabase database){
+    public void SaveMood (String id, String mood,  String date, String month, String year, SQLiteDatabase database){
         ContentValues contentValues= new ContentValues();
+        contentValues.put(DBStructure.ID, id);
         contentValues.put(DBStructure.EVENT, mood);
-        //contentValues.put(DBStructure.TIME, time);
         contentValues.put(DBStructure.DATE, date);
         contentValues.put(DBStructure.MONTH, month);
         contentValues.put(DBStructure.YEAR, year);

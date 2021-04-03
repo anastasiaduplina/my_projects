@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -56,6 +57,29 @@ public class CustomCalendarView extends LinearLayout {
     AlertDialog alertDialog;
     List<Date> dates = new ArrayList<>();
     List <Events> eventsList= new ArrayList<>();
+    public static SQLiteDatabase db;
+    public static DBOpenHelper dbOpenHelper;
+
+    public static int Kolvo(Context context){
+        dbOpenHelper= new DBOpenHelper(context);
+        dbOpenHelper.onOpen(db);
+        String query = "select count(*) from eventstable";
+        db = dbOpenHelper.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        int num= c.getColumnCount();
+        c.close();
+        Log.i("kolvo",num+"");
+        return num;
+
+    }
+    public long kolvo(){
+        dbOpenHelper= new DBOpenHelper(context);
+        dbOpenHelper.onOpen(db);
+        db = dbOpenHelper.getWritableDatabase();
+        long numRows = DatabaseUtils.longForQuery(db, "SELECT COUNT(*) FROM eventstable", null);
+        Log.i("num", numRows+"");
+        return numRows;
+    }
 
     public CustomCalendarView(Context context) {
         super(context);
@@ -94,6 +118,8 @@ public class CustomCalendarView extends LinearLayout {
                                                 Button two= addView.findViewById(R.id.button2);
                                                 Button tree= addView.findViewById(R.id.button3);
                                                 Button close= addView.findViewById(R.id.close);
+                                                Button delete= addView.findViewById(R.id.delete);
+                                                Button save= addView.findViewById(R.id.save);
                                                 final String date= eventDateFormat.format(dates.get(position));
                                                 final String month = monthFormat.format(dates.get(position));
                                                 final String year = yearFormat.format(dates.get(position));
@@ -102,11 +128,12 @@ public class CustomCalendarView extends LinearLayout {
                                                     @Override
                                                     public void onClick(View v) {
                                                         a++;
+                                                        long h = kolvo();
                                                         if (a % 2 !=0){
                                                         view.setBackgroundColor(getContext().getResources().getColor(R.color.purple_500));
-                                                        SaveMood("1", date,month,year);}
+                                                        }
                                                         else{view.setBackgroundColor(getContext().getResources().getColor(R.color.green));
-                                                        DeleteMood("1", date,month,year);
+
                                                             }
                                                     }
                                                 });
@@ -115,11 +142,12 @@ public class CustomCalendarView extends LinearLayout {
                                                     @Override
                                                     public void onClick(View v) {
                                                         a++;
+                                                        long h = kolvo();
                                                         if (a % 2 !=0){
                                                             view.setBackgroundColor(getContext().getResources().getColor(R.color.purple_200));
-                                                            SaveMood("2", date,month,year);}
+                                                            }
                                                         else{view.setBackgroundColor(getContext().getResources().getColor(R.color.green));
-                                                        DeleteMood("2", date,month,year);}
+                                                        }
                                                     }
                                                 });
                                                 tree.setOnClickListener(new OnClickListener() {
@@ -127,17 +155,30 @@ public class CustomCalendarView extends LinearLayout {
                                                     @Override
                                                     public void onClick(View v) {
                                                         a++;
+                                                        long h = kolvo();
                                                         if (a % 2 !=0){
                                                             view.setBackgroundColor(getContext().getResources().getColor(R.color.purple_700));
-                                                            SaveMood("3", date,month,year);}
+                                                            }
                                                         else{view.setBackgroundColor(getContext().getResources().getColor(R.color.green));
-                                                        DeleteMood("3", date,month,year);}
+                                                        }
                                                     }
                                                 });
                                                 close.setOnClickListener(new OnClickListener() {
                                                     @Override
                                                     public void onClick(View v) {
                                                         alertDialog.dismiss();
+                                                    }
+                                                });
+                                                delete.setOnClickListener(new OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View v) {
+                                                        DeleteMood(Long.toString(kolvo()),"1", date,month,year);
+                                                    }
+                                                });
+                                                save.setOnClickListener(new OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View v) {
+                                                        SaveMood(Long.toString(kolvo()),"1", date,month,year);
                                                     }
                                                 });
                                                 builder.setView(addView);
@@ -205,33 +246,39 @@ public class CustomCalendarView extends LinearLayout {
         super(context, attrs, defStyleAttr);
 
     }
-    private void SaveEvent(String event, String time, String date, String month, String year){
+//    private void SaveEvent(String event, String time, String date, String month, String year){
+//        DBOpenHelper dbOpenHelper= new DBOpenHelper(context);
+//        SQLiteDatabase database= dbOpenHelper.getWritableDatabase();
+//        dbOpenHelper.SaveEvent(event, time, date, month,year, database);
+//        dbOpenHelper.close();
+//        Toast.makeText(context,"Event Saved", Toast.LENGTH_SHORT).show();
+//
+//
+//    }
+    private void SaveMood(String id,String mood, String date, String month, String year){
         DBOpenHelper dbOpenHelper= new DBOpenHelper(context);
         SQLiteDatabase database= dbOpenHelper.getWritableDatabase();
-        dbOpenHelper.SaveEvent(event, time, date, month,year, database);
-        dbOpenHelper.close();
-        Toast.makeText(context,"Event Saved", Toast.LENGTH_SHORT).show();
-
-
-    }
-    private void SaveMood(String mood,  String date, String month, String year){
-        DBOpenHelper dbOpenHelper= new DBOpenHelper(context);
-        SQLiteDatabase database= dbOpenHelper.getWritableDatabase();
-        dbOpenHelper.SaveMood(mood, date, month,year, database);
+        dbOpenHelper.SaveMood(id,mood, date, month,year, database);
         dbOpenHelper.close();
         Toast.makeText(context,"Mood Saved", Toast.LENGTH_SHORT).show();
 
 
     }
-    private void DeleteMood(String mood,  String date, String month, String year){
+    private void DeleteMood(String id, String mood,  String date, String month, String year){
         DBOpenHelper dbOpenHelper= new DBOpenHelper(context);
         SQLiteDatabase database= dbOpenHelper.getWritableDatabase();
-       database.delete(DBStructure.EVENT_TABLE_NAME, "event = ?",new String[]{String.valueOf(date)} );
-       database.delete(DBStructure.EVENT_TABLE_NAME, "date = ?", new String[]{String.valueOf(date)});
-       database.delete(DBStructure.EVENT_TABLE_NAME, "month = ?", new String[]{String.valueOf(month)});
-       database.delete(DBStructure.EVENT_TABLE_NAME, "year = ?", new String[]{String.valueOf(year)});
+        int a=10;
+
+      // database.delete(DBStructure.EVENT_TABLE_NAME, DBStructure.ID + "=" + id,null);
+        //database.delete(DBStructure.EVENT_TABLE_NAME, "event = ?", new String[]{String.valueOf(mood)});
+        database.delete(DBStructure.EVENT_TABLE_NAME, "id = ?", new String[]{String.valueOf(id)});
+        database.delete(DBStructure.EVENT_TABLE_NAME, "date = ?", new String[]{String.valueOf(id)});
+        database.delete(DBStructure.EVENT_TABLE_NAME, "month = ?", new String[]{String.valueOf(id)});
+        database.delete(DBStructure.EVENT_TABLE_NAME, "year = ?", new String[]{String.valueOf(id)});
+
        Cursor cursor = database.rawQuery("select * from "+ DBStructure.EVENT_TABLE_NAME ,null);
        Log.i("cursor",   cursor.getColumnNames().toString() +"");
+       cursor.close();
 
 
     }
