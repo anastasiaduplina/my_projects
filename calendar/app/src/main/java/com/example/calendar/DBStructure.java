@@ -4,7 +4,9 @@ public class DBStructure {
     public static final  String  DB_NAME= "EVENTS_DB";
     public static final  int  DB_VERSION= 1;
     public static final  String  EVENT_TABLE_NAME= "eventstable";
+    public static final  String  MOOD_TABLE_NAME= "moodtable";
     public static final  String  EVENT= "event";
+    public static final  String  MOOD= "mood";
     public static final  String  ID= "id";
     public static final  String  TIME= "time";
     public static final  String  DATE= "date";

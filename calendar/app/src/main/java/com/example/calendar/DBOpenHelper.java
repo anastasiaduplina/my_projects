@@ -13,6 +13,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 //            + DBStructure.EVENT + " TEXT, "+DBStructure.TIME+ " TEXT, "+DBStructure.DATE+ " TEXT, "+DBStructure.MONTH+ " TEXT, "+DBStructure.YEAR+ " TEXT)" ;
     private static final String CREATE_EVENT_TABLE= "create table " + DBStructure.EVENT_TABLE_NAME + DBStructure.ID +"(ID INTEGER PRIMARY KEY , "
             + DBStructure.EVENT + " TEXT, "+DBStructure.DATE+ " TEXT, "+DBStructure.MONTH+ " TEXT, "+DBStructure.YEAR+ " TEXT)" ;
+
     private static final String DROP_EVENTS_TABLE="DROP TABLE IF EXISTS "+ DBStructure.EVENT_TABLE_NAME;
 
     public DBOpenHelper(@Nullable Context context) {
@@ -39,14 +40,21 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 //       database.insert(DBStructure.EVENT_TABLE_NAME, null, contentValues);
 //    }
 
-    public void SaveMood (String id, String mood,  String date, String month, String year, SQLiteDatabase database){
+    public void SaveMood ( String mood,  String date, String month, String year, SQLiteDatabase database){
         ContentValues contentValues= new ContentValues();
-        contentValues.put(DBStructure.ID, id);
+
         contentValues.put(DBStructure.EVENT, mood);
         contentValues.put(DBStructure.DATE, date);
         contentValues.put(DBStructure.MONTH, month);
         contentValues.put(DBStructure.YEAR, year);
         database.insert(DBStructure.EVENT_TABLE_NAME, null, contentValues);
+    }
+    public void DeleteMood (String id,String mood,  String date, String month, String year, SQLiteDatabase database){
+        database.delete(DBStructure.EVENT_TABLE_NAME, DBStructure.ID +" = " + id, null);
+        database.delete(DBStructure.EVENT_TABLE_NAME, DBStructure.EVENT +" = " + mood, null);
+        database.delete(DBStructure.EVENT_TABLE_NAME, DBStructure.MONTH +" = " + month, null);
+        database.delete(DBStructure.EVENT_TABLE_NAME, DBStructure.YEAR +" = " + year, null);
+        database.delete(DBStructure.EVENT_TABLE_NAME, DBStructure.DATE +" = " + date, null);
     }
 
     public Cursor ReadEvents(String date, SQLiteDatabase database){
