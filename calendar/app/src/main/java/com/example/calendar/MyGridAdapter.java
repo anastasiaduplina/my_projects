@@ -1,6 +1,8 @@
 package com.example.calendar;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,12 +27,14 @@ public class MyGridAdapter extends ArrayAdapter {
     Calendar currentDate;
     List<Events> events;
     LayoutInflater inflater;
+    List<String> days;
 
-    public MyGridAdapter(@NonNull Context context, List<Date> dates,Calendar currentDate,List<Events> events) {
+    public MyGridAdapter(@NonNull Context context, List<Date> dates,Calendar currentDate,List<Events> events,List<String> days) {
         super(context, R.layout.single_cell_layout);
         this.dates=dates;
         this.currentDate=currentDate;
         this.events= events;
+        this.days= days;
         inflater= LayoutInflater.from(context);
 
     }
@@ -49,7 +53,8 @@ public class MyGridAdapter extends ArrayAdapter {
         int currentYear = currentDate.get(Calendar.YEAR);
         int a=1;
         View view= convertView;
-        //view.getMatrix().
+
+
         if(view== null){
             view=inflater.inflate(R.layout.single_cell_layout,parent,false);
         }
@@ -61,27 +66,50 @@ public class MyGridAdapter extends ArrayAdapter {
         }else{
             view.setBackgroundColor(Color.parseColor("#CCCCCC"));
         }
-
-//        if (DayNo == 15&& displayMonth==3){
-//            view.setBackgroundColor(getContext().getResources().getColor(R.color.purple_500));
-//
-//        }
         TextView Day_Number = view.findViewById(R.id.calendar_day);
         TextView EventNumber = view.findViewById(R.id.events_id);
         Day_Number.setText(String.valueOf(DayNo));
-        Calendar eventCalendar = Calendar.getInstance();
-        ArrayList<String> arrayList = new ArrayList<>();
-        for (int i=0; i<events.size();i++){
-            eventCalendar.setTime(ConvertStringToDate(events.get(i).getDATE()));
-            if (DayNo==eventCalendar.get(Calendar.DAY_OF_MONTH)&& displayMonth== eventCalendar.get(Calendar.MONTH)+1
-            && displayYear==eventCalendar.get(Calendar.YEAR)){
-                arrayList.add(events.get(i).getEVENT());
-                //EventNumber.setText(arrayList.size()+" Events");
-                //EventNumber.setText(" mood");
-                view.setBackgroundColor(getContext().getResources().getColor(R.color.purple_500));
+
+//        Calendar eventCalendar = Calendar.getInstance();
+//        ArrayList<String> arrayList = new ArrayList<>();
+//        for (int i=0; i<events.size();i++){
+//            eventCalendar.setTime(ConvertStringToDate(events.get(i).getDATE()));
+//            if (DayNo==eventCalendar.get(Calendar.DAY_OF_MONTH)&& displayMonth== eventCalendar.get(Calendar.MONTH)+1
+//            && displayYear==eventCalendar.get(Calendar.YEAR)){
+//                arrayList.add(events.get(i).getEVENT());
+//                //EventNumber.setText(arrayList.size()+" Events");
+//                //EventNumber.setText(" mood");
+//                view.setBackgroundColor(getContext().getResources().getColor(R.color.purple_500));
+//            }
+//        }
+        for (String i:days){
+            String[]dday=i.split(" ");
+            switch (dday[1]){
+                case "January":dday[1]="1"; break;
+                case "February":dday[1]="2"; break;
+                case "March":dday[1]="3"; break;
+                case "April":dday[1]="4"; break;
+                case "May":dday[1]="5"; break;
+                case "June":dday[1]="6"; break;
+                case "July":dday[1]="7"; break;
+                case "August":dday[1]="8"; break;
+                case "September":dday[1]="9"; break;
+                case "October":dday[1]="10"; break;
+                case "November":dday[1]="11"; break;
+                case "December":dday[1]="12"; break;
+            }
+            if (DayNo==Integer.parseInt(dday[0]) && displayMonth==Integer.parseInt(dday[1]) && displayYear==Integer.parseInt(dday[2])){
+                if (dday[3].equals("500")) {
+                    view.setBackgroundColor(getContext().getResources().getColor(R.color.purple_500));
+                }
+                if (dday[3].equals("700")) {
+                    view.setBackgroundColor(getContext().getResources().getColor(R.color.purple_700));
+                }
+                if (dday[3].equals("200")) {
+                    view.setBackgroundColor(getContext().getResources().getColor(R.color.purple_200));
+                }
             }
         }
-
          
         return view;
     }

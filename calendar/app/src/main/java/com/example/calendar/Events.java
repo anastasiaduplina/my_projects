@@ -1,11 +1,11 @@
 package com.example.calendar;
 
 public class Events {
-    String EVENT, TIME, DATE, MONTH,YEAR;
+    String EVENT, DATE, MONTH,YEAR;
 
-    public Events(String EVENT, String TIME, String DATE, String MONTH, String YEAR) {
+    public Events(String EVENT, String DATE, String MONTH, String YEAR) {
         this.EVENT = EVENT;
-        this.TIME = TIME;
+
         this.DATE = DATE;
         this.MONTH = MONTH;
         this.YEAR = YEAR;
@@ -19,13 +19,7 @@ public class Events {
         this.EVENT = EVENT;
     }
 
-    public String getTIME() {
-        return TIME;
-    }
 
-    public void setTIME(String TIME) {
-        this.TIME = TIME;
-    }
 
     public String getDATE() {
         return DATE;
