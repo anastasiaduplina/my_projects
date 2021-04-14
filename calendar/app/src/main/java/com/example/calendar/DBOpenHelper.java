@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 public class DBOpenHelper extends SQLiteOpenHelper {
 //    private static final String CREATE_EVENT_TABLE= "create table " + DBStructure.EVENT_TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, "
 //            + DBStructure.EVENT + " TEXT, "+DBStructure.TIME+ " TEXT, "+DBStructure.DATE+ " TEXT, "+DBStructure.MONTH+ " TEXT, "+DBStructure.YEAR+ " TEXT)" ;
-    private static final String CREATE_EVENT_TABLE= "CREATE TABLE IF NOT EXISTS " + DBStructure.EVENT_TABLE_NAME +" ("+ DBStructure.ID +" INTEGER PRIMARY KEY AUTOINCREMENT, "
+    private static final String CREATE_EVENT_TABLE= "CREATE TABLE IF NOT EXISTS " + DBStructure.EVENT_TABLE_NAME +" ("+ DBStructure.ID +" INTEGER PRIMARY KEY, "
             + DBStructure.EVENT + " TEXT, "+ DBStructure.DATE + " TEXT, " + DBStructure.MONTH + " TEXT, " + DBStructure.YEAR + " TEXT)" ;
 
     private static final String DROP_EVENTS_TABLE="DROP TABLE IF EXISTS "+ DBStructure.EVENT_TABLE_NAME;

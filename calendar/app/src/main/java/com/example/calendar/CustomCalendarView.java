@@ -99,9 +99,9 @@ public class CustomCalendarView extends LinearLayout {
                 Button one= addView.findViewById(R.id.button1);
                 Button two= addView.findViewById(R.id.button2);
                 Button tree= addView.findViewById(R.id.button3);
-                Button close= addView.findViewById(R.id.close);
+                //Button close= addView.findViewById(R.id.close);
                 Button delete= addView.findViewById(R.id.deleteall);
-                Button save= addView.findViewById(R.id.save);
+                //Button save= addView.findViewById(R.id.save);
                 final String date= eventDateFormat.format(dates.get(position));
                 final String month = monthFormat.format(dates.get(position));
                 final String year = yearFormat.format(dates.get(position));
@@ -113,6 +113,10 @@ public class CustomCalendarView extends LinearLayout {
                     public void onClick(View v) {
                         view.setBackgroundColor(getContext().getResources().getColor(R.color.purple_500));
                         color[0] = "500";
+                        SaveMood(color[0], date,month,year);
+                        alertDialog.dismiss();
+                        SetUpCalendar();
+                        CountMood(month);
                     }
                 });
                 two.setOnClickListener(new OnClickListener() {
@@ -121,6 +125,10 @@ public class CustomCalendarView extends LinearLayout {
                     public void onClick(View v) {
                             view.setBackgroundColor(getContext().getResources().getColor(R.color.purple_200));
                         color[0] = "200";
+                        SaveMood(color[0], date,month,year);
+                        alertDialog.dismiss();
+                        SetUpCalendar();
+                        CountMood(month);
                     }
                 });
                 tree.setOnClickListener(new OnClickListener() {
@@ -129,29 +137,36 @@ public class CustomCalendarView extends LinearLayout {
                     public void onClick(View v) {
                             view.setBackgroundColor(getContext().getResources().getColor(R.color.purple_700));
                         color[0] = "700";
-                    }
-                });
-                close.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+                        SaveMood(color[0], date,month,year);
                         alertDialog.dismiss();
                         SetUpCalendar();
+                        CountMood(month);
                     }
                 });
+//                close.setOnClickListener(new OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        alertDialog.dismiss();
+//                        SetUpCalendar();
+//                    }
+//                });
                 delete.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         DeleteMood(date);
+                        alertDialog.dismiss();
                         SetUpCalendar();
+                        CountMood(month);
+
                     }
                 });
-                save.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        SaveMood(color[0], date,month,year);
-                        SetUpCalendar();
-                    }
-                });
+//                save.setOnClickListener(new OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        SaveMood(color[0], date,month,year);
+//                        SetUpCalendar();
+//                    }
+//                });
                 builder.setView(addView);
                 alertDialog= builder.create();
                 alertDialog.show();
@@ -231,19 +246,40 @@ public class CustomCalendarView extends LinearLayout {
         SQLiteDatabase database= dbOpenHelper.getWritableDatabase();
         dbOpenHelper.SaveMood(mood, date, month,year, database);
 
-        Cursor cursor= database.query(DBStructure.EVENT_TABLE_NAME,null,null,null,null,null,null);
-        if (cursor.moveToFirst()){
-            int indexid = cursor.getColumnIndex(DBStructure.ID);
-            int indexmood = cursor.getColumnIndex(DBStructure.EVENT);
-            int indexdate = cursor.getColumnIndex(DBStructure.DATE);
-            int indexmonth = cursor.getColumnIndex(DBStructure.MONTH);
-            int indexyear = cursor.getColumnIndex(DBStructure.YEAR);
+        Cursor cursor1= database.query(DBStructure.EVENT_TABLE_NAME,null,null,null,null,null,null);
+        if (cursor1.moveToFirst()){
+            int indexid = cursor1.getColumnIndex(DBStructure.ID);
+            int indexmood = cursor1.getColumnIndex(DBStructure.EVENT);
+            int indexdate = cursor1.getColumnIndex(DBStructure.DATE);
+            int indexmonth = cursor1.getColumnIndex(DBStructure.MONTH);
+            int indexyear = cursor1.getColumnIndex(DBStructure.YEAR);
             do {
-                Log.i("id:","id:" +cursor.getString(indexid)+ " mood:"+cursor.getString(indexmood)+ " date:" +cursor.getString(indexdate)
-                        +" month:"+cursor.getString(indexmonth)+ " year:"+cursor.getString(indexyear));
-            }while(cursor.moveToNext());
+
+                String date1=cursor1.getString(indexdate) ;
+                String id1=cursor1.getString(indexid);
+                Cursor cursor2= database.query(DBStructure.EVENT_TABLE_NAME,null,null,null,null,null,null);
+                if (cursor2.moveToFirst()){
+                    do{
+                        String date2= cursor2.getString(indexdate);
+                        String id2= cursor2.getString(indexid);
+                        if (date1.equals(date2)&& !(id1.equals(id2))){
+                            if (Integer.parseInt(id1)>Integer.parseInt(id2)){
+                                long status= database.delete(DBStructure.EVENT_TABLE_NAME,DBStructure.ID + " = ?",new String[]{id2});
+                                //Log.i("id1>id2","delete "+id2);
+                            }
+                            if (Integer.parseInt(id1)<Integer.parseInt(id2)){
+                                long status= database.delete(DBStructure.EVENT_TABLE_NAME,DBStructure.ID + " = ?",new String[]{id1});
+                                //Log.i("id1<id2","delete "+id1);
+                            }
+                        }
+                    }while(cursor2.moveToNext());
+                }
+                Log.i("id:","id:" +cursor1.getString(indexid)+ " mood:"+cursor1.getString(indexmood)+ " date:" +cursor1.getString(indexdate)
+                        +" month:"+cursor1.getString(indexmonth)+ " year:"+cursor1.getString(indexyear));
+            }while(cursor1.moveToNext());
         }
-        cursor.close();
+
+        cursor1.close();
         dbOpenHelper.close();
     }
     private void DeleteMood(String date){
@@ -253,6 +289,31 @@ public class CustomCalendarView extends LinearLayout {
         dbOpenHelper.close();
 
     }
+     public  void CountMood(String Month){
+        TextView countMood = findViewById(R.id.countmood);
+         dbOpenHelper= new DBOpenHelper( context);
+         SQLiteDatabase database= dbOpenHelper.getReadableDatabase();
+         Cursor cursor= database.query(DBStructure.EVENT_TABLE_NAME,null,null,null,null,null,null);
+         int m500=0;
+         int m200=0;
+         int m700=0;
+         if (cursor.moveToFirst()){
+             do {
+                 String mood= cursor.getString(cursor.getColumnIndex(DBStructure.EVENT)) ;
+                 String month= cursor.getString(cursor.getColumnIndex(DBStructure.MONTH)) ;
+                 if (month.equals(Month)){
+                     switch (mood){
+                         case"500": m500++;break;
+                         case"700": m700++;break;
+                         case"200": m200++;break;
+                     }
+                 }
+
+             }while(cursor.moveToNext());
+         }
+         String text = "Mood 1="+Integer.toString(m500)+"  "+"Mood 2="+Integer.toString(m200)+"  "+"Mood 3="+Integer.toString(m700);
+         countMood.setText(text);
+     }
 
     private void IntializeLaoyut (){
         LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
