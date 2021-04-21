@@ -15,5 +15,7 @@
     <string name="close">Close</string>
     <string name="delete">Delete</string>
     <string name="save">Save</string>
+    <string name="piechart">piechart</string>
+    <string name="calendar">calendar</string>
 
 </resources>
