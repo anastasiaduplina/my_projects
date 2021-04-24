@@ -25,7 +25,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     CustomCalendarView customCalendarView;
-    PPieCChart pPieCChart;
+
 
 
     @Override

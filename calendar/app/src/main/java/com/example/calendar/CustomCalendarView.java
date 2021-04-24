@@ -38,6 +38,7 @@ public class CustomCalendarView extends LinearLayout {
     private static final int MAX_CALENDAR_DAYS= 42;
     Calendar calendar=Calendar.getInstance(Locale.ENGLISH);
     Context context;
+
     SimpleDateFormat eventDateFormat= new SimpleDateFormat("dd MMMM yyyy", Locale.ENGLISH);
     SimpleDateFormat DateFormat= new SimpleDateFormat("dd", Locale.ENGLISH);
     SimpleDateFormat dateFormat= new SimpleDateFormat("MMMM yyyy", Locale.ENGLISH);
@@ -46,17 +47,17 @@ public class CustomCalendarView extends LinearLayout {
 
     MyGridAdapter myGridAdapter;
     AlertDialog alertDialog;
-    List<Date> dates = new ArrayList<>();
+    public List<Date> dates = new ArrayList<>();
     List <Events> eventsList= new ArrayList<>();
-    public static SQLiteDatabase db;
+    //public static SQLiteDatabase db;
     public static DBOpenHelper dbOpenHelper;
 
 
 
 
-    public CustomCalendarView(Context context) {
-        super(context);
-    }
+//    public CustomCalendarView(Context context) {
+//        super(context);
+//    }
 
     public CustomCalendarView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -313,6 +314,8 @@ public class CustomCalendarView extends LinearLayout {
          }
          String text = "Mood 1="+Integer.toString(m500)+"  "+"Mood 2="+Integer.toString(m200)+"  "+"Mood 3="+Integer.toString(m700);
          countMood.setText(text);
+         cursor.close();
+         dbOpenHelper.close();
      }
 
     private void IntializeLaoyut (){
@@ -356,6 +359,8 @@ public class CustomCalendarView extends LinearLayout {
 
             }while(cursor.moveToNext());
         }
+        cursor.close();
+        dbOpenHelper.close();
         return days;
     }
     private void CollectEventsPerMonth (String Month, String year){

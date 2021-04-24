@@ -17,7 +17,7 @@ public class CustomCalendar extends MainActivity {
         calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //customCalendarView= (CustomCalendarView)findViewById(R.id.custom_calendar_view);
+
                 Intent intent = new Intent(CustomCalendar.this, CustomCalendar.class);
                 startActivity(intent);
             }
