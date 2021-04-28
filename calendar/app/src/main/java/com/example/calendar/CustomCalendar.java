@@ -14,6 +14,7 @@ public class CustomCalendar extends MainActivity {
         setContentView(R.layout.custom_calendar);
         Button calendar = findViewById(R.id.calendarbutton);
         Button piechart = findViewById(R.id.piechartbutton);
+        Button addnote= findViewById(R.id.add_note);
         calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -29,6 +30,7 @@ public class CustomCalendar extends MainActivity {
                 startActivity(intent);
             }
         });
+
 
     }
 }

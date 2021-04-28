@@ -13,7 +13,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 //    private static final String CREATE_EVENT_TABLE= "create table " + DBStructure.EVENT_TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, "
 //            + DBStructure.EVENT + " TEXT, "+DBStructure.TIME+ " TEXT, "+DBStructure.DATE+ " TEXT, "+DBStructure.MONTH+ " TEXT, "+DBStructure.YEAR+ " TEXT)" ;
     private static final String CREATE_EVENT_TABLE= "CREATE TABLE IF NOT EXISTS " + DBStructure.EVENT_TABLE_NAME +" ("+ DBStructure.ID +" INTEGER PRIMARY KEY, "
-            + DBStructure.EVENT + " TEXT, "+ DBStructure.DATE + " TEXT, " + DBStructure.MONTH + " TEXT, " + DBStructure.YEAR + " TEXT)" ;
+            + DBStructure.EVENT + " TEXT, "+ DBStructure.DATE + " TEXT, " + DBStructure.MONTH + " TEXT, " + DBStructure.YEAR + " TEXT, " + DBStructure.NOTE + " TEXT)" ;
 
     private static final String DROP_EVENTS_TABLE="DROP TABLE IF EXISTS "+ DBStructure.EVENT_TABLE_NAME;
 
@@ -39,6 +39,16 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         contentValues.put(DBStructure.DATE, date);
         contentValues.put(DBStructure.MONTH, month);
         contentValues.put(DBStructure.YEAR, year);
+        long status =database.insert(DBStructure.EVENT_TABLE_NAME,null,contentValues);
+
+    }
+    public void SaveNote ( String mood,  String date, String month, String year, String note, SQLiteDatabase database){
+        ContentValues contentValues= new ContentValues();
+        contentValues.put(DBStructure.EVENT, mood);
+        contentValues.put(DBStructure.DATE, date);
+        contentValues.put(DBStructure.MONTH, month);
+        contentValues.put(DBStructure.YEAR, year);
+        contentValues.put(DBStructure.NOTE,note);
         long status =database.insert(DBStructure.EVENT_TABLE_NAME,null,contentValues);
 
     }

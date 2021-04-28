@@ -20,6 +20,8 @@
         </activity>
         <activity android:name=".CustomCalendar">
         </activity>
+        <activity android:name=".NoteAdd">
+        </activity>
     </application>
 
 </manifest>

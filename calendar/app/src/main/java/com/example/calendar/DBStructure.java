@@ -12,4 +12,5 @@ public class DBStructure {
     public static final  String  DATE= "date";
     public static final  String  MONTH= "month";
     public static final  String  YEAR= "year";
+    public static final  String  NOTE= "note";
 }

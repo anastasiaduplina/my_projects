@@ -17,5 +17,6 @@
     <string name="save">Save</string>
     <string name="piechart">piechart</string>
     <string name="calendar">calendar</string>
+    <string name="add_note">Add note</string>
 
 </resources>
