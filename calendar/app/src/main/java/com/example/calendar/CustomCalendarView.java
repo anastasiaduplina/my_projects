@@ -337,19 +337,40 @@ public class CustomCalendarView extends LinearLayout {
 
                 String date1=cursor1.getString(indexdate) ;
                 String id1=cursor1.getString(indexid);
-                //String note1=cursor1.getString(indexnote);
+                String note1=cursor1.getString(indexnote);
                 Cursor cursor2= database.query(DBStructure.EVENT_TABLE_NAME,null,null,null,null,null,null);
                 if (cursor2.moveToFirst()){
                     do{
                         String date2= cursor2.getString(indexdate);
                         String id2= cursor2.getString(indexid);
-                        //String note2=cursor2.getString(indexnote);
+                        String note2=cursor2.getString(indexnote);
+                        ContentValues contentValues1= new ContentValues();
                         if (date1.equals(date2)&& !(id1.equals(id2))){
                             if (Integer.parseInt(id1)>Integer.parseInt(id2)){
+                                if(note2!=null &note1==null){
+                                    contentValues.put(DBStructure.NOTE,note2);
+                                    contentValues.put(DBStructure.DATE,cursor1.getString(indexdate));
+                                    contentValues.put(DBStructure.MONTH,cursor1.getString(indexmonth));
+                                    contentValues.put(DBStructure.YEAR,cursor1.getString(indexyear));
+                                    contentValues.put(DBStructure.EVENT,cursor1.getString(indexmood));
+                                    long status = database.insert(DBStructure.EVENT_TABLE_NAME,null,contentValues);
+                                    long status2= database.delete(DBStructure.EVENT_TABLE_NAME,DBStructure.ID + " = ?",new String[]{id2});
+                                    long status1= database.delete(DBStructure.EVENT_TABLE_NAME,DBStructure.ID + " = ?",new String[]{id1});
+                                }
                                 long status= database.delete(DBStructure.EVENT_TABLE_NAME,DBStructure.ID + " = ?",new String[]{id2});
                                 //Log.i("id1>id2","delete "+id2);
                             }
                             if (Integer.parseInt(id1)<Integer.parseInt(id2)){
+                                if(note1!=null &note2==null){
+                                    contentValues.put(DBStructure.NOTE,note1);
+                                    contentValues.put(DBStructure.DATE,cursor2.getString(indexdate));
+                                    contentValues.put(DBStructure.MONTH,cursor2.getString(indexmonth));
+                                    contentValues.put(DBStructure.YEAR,cursor2.getString(indexyear));
+                                    contentValues.put(DBStructure.EVENT,cursor2.getString(indexmood));
+                                    long status = database.insert(DBStructure.EVENT_TABLE_NAME,null,contentValues);
+                                    long status2= database.delete(DBStructure.EVENT_TABLE_NAME,DBStructure.ID + " = ?",new String[]{id2});
+                                    long status1= database.delete(DBStructure.EVENT_TABLE_NAME,DBStructure.ID + " = ?",new String[]{id1});
+                                }
                                 long status= database.delete(DBStructure.EVENT_TABLE_NAME,DBStructure.ID + " = ?",new String[]{id1});
                                 //Log.i("id1<id2","delete "+id1);
                             }
