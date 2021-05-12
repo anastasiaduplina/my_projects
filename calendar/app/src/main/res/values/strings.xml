@@ -18,5 +18,12 @@
     <string name="piechart">piechart</string>
     <string name="calendar">calendar</string>
     <string name="add_note">Add note</string>
+    <string name="textview">TextView</string>
+    <string name="glad">Веселое</string>
+    <string name="sad">Грустное</string>
+    <string name="angry">Злое</string>
+    <string name="deleterus">Удалить</string>
+    <string name="add_note_rus">Добавить заметку</string>
+    <string name="saverus">Сохранить</string>
 
 </resources>

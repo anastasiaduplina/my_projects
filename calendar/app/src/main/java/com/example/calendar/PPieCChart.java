@@ -109,26 +109,21 @@ public class PPieCChart extends MainActivity {
         }
         pieChart=findViewById(R.id.piechart);
         ArrayList<PieEntry> entries = new ArrayList<>();
-        if(m500!=0){ entries.add(new PieEntry(m500, "1 mood"));}
-        if(m200!=0){entries.add(new PieEntry(m200, "2 mood"));}
-        if(m700!=0){entries.add(new PieEntry(m700, "3 mood"));}
-
-        PieDataSet dataSet = new PieDataSet(entries, "Mood");
         ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(0xFF6200EE);
-        colors.add(0xFFBB86FC);
-        colors.add(0xFF3700B3);
-        for (int c : ColorTemplate.PASTEL_COLORS)
-            colors.add(c);
-        for (int c : ColorTemplate.JOYFUL_COLORS)
-            colors.add(c);
-        for (int c : ColorTemplate.COLORFUL_COLORS)
-            colors.add(c);
+        if(m500!=0){ entries.add(new PieEntry(m500, "Веселое"));colors.add(0xFFdbcea4);}
+        if(m200!=0){entries.add(new PieEntry(m200, "Грустное"));colors.add(0xFF97a5c9);}
+        if(m700!=0){entries.add(new PieEntry(m700, "Злое"));colors.add(0xFFc98383);}
+
+        PieDataSet dataSet = new PieDataSet(entries, "  Настроение");
+
+
+
+
 
         dataSet.setColors(colors);
         //dataSet.setGradientColor(0xff0000ff,0xffffff00);
         PieData data= new PieData(dataSet);
-        data.setHighlightEnabled(true);
+       // data.setHighlightEnabled(true);
         data.setValueTextSize(15f);
         data.setValueTextColor(Color.BLACK);
         pieChart.setData(data);

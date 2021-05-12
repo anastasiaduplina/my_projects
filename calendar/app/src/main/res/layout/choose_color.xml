@@ -1,49 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="@color/purple_200">
+    android:background="@color/white"
+    android:orientation="vertical">
 
 
     <Button
         android:id="@+id/button1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/_1" />
+        android:text="@string/glad"
+        android:textColor="@color/black"
+        app:backgroundTint="@color/yellow" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/_2" />
+        android:text="@string/sad"
+        android:textColor="@color/black"
+        app:backgroundTint="@color/blue" />
 
     <Button
         android:id="@+id/button3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/_3" />
+        android:text="@string/angry"
+        android:textColor="@color/black"
+        app:backgroundTint="@color/red" />
 
 
     <Button
         android:id="@+id/deleteall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/delete" />
+        android:text="@string/deleterus"
+        android:textColor="@color/black"
+        app:backgroundTint="@color/green" />
 
     <Button
         android:id="@+id/add_note"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/add_note" />
+        android:text="@string/add_note_rus"
+        android:textColor="@color/black"
+        app:backgroundTint="@color/green" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textColor="@color/white"
-        android:textSize="20dp"/>
+        android:text="@string/textview"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
 
 </LinearLayout>

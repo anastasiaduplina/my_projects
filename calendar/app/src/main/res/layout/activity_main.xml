@@ -4,19 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/green"
     tools:context=".MainActivity">
 
-<!--    <com.example.calendar.CustomCalendarView-->
-<!--        android:id="@+id/custom_calendar_view"-->
-<!--        android:layout_width="411dp"-->
-<!--        android:layout_height="581dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent">-->
+    <!--    <com.example.calendar.CustomCalendarView-->
+    <!--        android:id="@+id/custom_calendar_view"-->
+    <!--        android:layout_width="411dp"-->
+    <!--        android:layout_height="581dp"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent">-->
 
-<!--    </com.example.calendar.CustomCalendarView>-->
+    <!--    </com.example.calendar.CustomCalendarView>-->
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="419dp"
         android:layout_height="52dp"
         android:gravity="fill_horizontal"
@@ -32,8 +34,12 @@
             android:id="@+id/calendarbutton"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:background="#FFFFFF"
             android:text="@string/calendar"
+            android:textColor="@color/black"
+            android:textSize="20sp"
             android:theme="?android:attr/buttonBarButtonStyle"
+            app:backgroundTint="@color/green"
             app:layout_constraintBottom_toBottomOf="@+id/piechartbutton"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -41,9 +47,27 @@
             android:id="@+id/piechartbutton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/green"
             android:text="@string/piechart"
+            android:textSize="20sp"
+            android:textColor="@color/black"
             android:theme="?android:attr/buttonBarButtonStyle"
+            app:backgroundTint="@color/green"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="296dp"
+        android:layout_height="222dp"
+        android:text="MOOD NOTE"
+
+        android:textSize="50sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.573"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.555" />
 </androidx.constraintlayout.widget.ConstraintLayout>

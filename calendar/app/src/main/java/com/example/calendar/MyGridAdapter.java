@@ -100,15 +100,21 @@ public class MyGridAdapter extends ArrayAdapter {
             }
             if (DayNo==Integer.parseInt(dday[0]) && displayMonth==Integer.parseInt(dday[1]) && displayYear==Integer.parseInt(dday[2])){
                 if (dday[3].equals("500")) {
-                    view.setBackgroundColor(getContext().getResources().getColor(R.color.purple_500));
+                    view.setBackgroundColor(getContext().getResources().getColor(R.color.yellow));
                 }
                 if (dday[3].equals("700")) {
-                    view.setBackgroundColor(getContext().getResources().getColor(R.color.purple_700));
+                    view.setBackgroundColor(getContext().getResources().getColor(R.color.red));
                 }
                 if (dday[3].equals("200")) {
-                    view.setBackgroundColor(getContext().getResources().getColor(R.color.purple_200));
+                    view.setBackgroundColor(getContext().getResources().getColor(R.color.blue));
                 }
             }
+        }
+        if (displayMonth == currentMonth && displayYear==currentYear){
+            //view.setBackgroundColor(getContext().getResources().getColor(R.color.green));
+            //view.setBackground// https://github.com/roomorama/Caldroid
+        }else{
+            view.setBackgroundColor(Color.parseColor("#CCCCCC"));
         }
          
         return view;

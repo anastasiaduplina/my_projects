@@ -116,11 +116,11 @@ public class CustomCalendarView extends LinearLayout {
                 final String[] color = new String[1];
                 color[0]="green";
                 if (CheckNullNote(date)){
-                    addnote.setText("Change note");
+                    addnote.setText("Изменить заметку");
                     textView.setVisibility(VISIBLE);
                     textView.setText(GetNote(date));
                 }else{
-                    addnote.setText("Add note");
+                    addnote.setText("Добавить заметку");
                     textView.setVisibility(INVISIBLE);
                 }
                 one.setOnClickListener(new OnClickListener() {
@@ -186,7 +186,7 @@ public class CustomCalendarView extends LinearLayout {
                                 Savenote(color[0],date,month, year,addNote.getText().toString() );
                                 Log.i("note",addNote.getText().toString()+"");
                                 alertDialog.dismiss();
-                                addnote.setText("Change note");
+                                addnote.setText("Изменить заметку");
                                 textView.setVisibility(VISIBLE);
                                 textView.setText(GetNote(date));
                             }
@@ -422,7 +422,7 @@ public class CustomCalendarView extends LinearLayout {
              }while(cursor.moveToNext());
          }
          String text = "Mood 1="+Integer.toString(m500)+"  "+"Mood 2="+Integer.toString(m200)+"  "+"Mood 3="+Integer.toString(m700);
-         countMood.setText(text);
+         //countMood.setText(text);
          cursor.close();
          dbOpenHelper.close();
      }
