@@ -9,6 +9,7 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -86,15 +87,15 @@ public class CustomCalendarView extends LinearLayout {
                 SetUpCalendar();
 
             }   });
-        DeleteButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DBOpenHelper dbOpenHelper= new DBOpenHelper(context);
-                SQLiteDatabase database= dbOpenHelper.getWritableDatabase();
-                database.delete(DBStructure.EVENT_TABLE_NAME, null,null);
-                SetUpCalendar();
-            }
-        });
+//        DeleteButton.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                DBOpenHelper dbOpenHelper= new DBOpenHelper(context);
+//                SQLiteDatabase database= dbOpenHelper.getWritableDatabase();
+//                database.delete(DBStructure.EVENT_TABLE_NAME, null,null);
+//                SetUpCalendar();
+//            }
+//        });
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -104,9 +105,9 @@ public class CustomCalendarView extends LinearLayout {
                 AlertDialog.Builder builder= new AlertDialog.Builder(context);
                 builder.setCancelable(true);
                 View addView = LayoutInflater.from(parent.getContext()).inflate(R.layout.choose_color,null);
-                Button one= addView.findViewById(R.id.button1);
-                Button two= addView.findViewById(R.id.button2);
-                Button tree= addView.findViewById(R.id.button3);
+                Button one= addView.findViewById(R.id.glad);
+                Button two= addView.findViewById(R.id.sad);
+                Button tree= addView.findViewById(R.id.angry);
                 Button delete= addView.findViewById(R.id.deleteall);
                 Button addnote= addView.findViewById(R.id.add_note);
                 TextView textView= addView.findViewById(R.id.textView);
@@ -127,8 +128,8 @@ public class CustomCalendarView extends LinearLayout {
 
                     @Override
                     public void onClick(View v) {
-                        view.setBackgroundColor(getContext().getResources().getColor(R.color.purple_500));
-                        color[0] = "500";
+                        view.setBackgroundColor(getContext().getResources().getColor(R.color.yellow));
+                        color[0] = "glad";
                         SaveMood(color[0], date,month,year);
                         //alertDialog.dismiss();
                         SetUpCalendar();
@@ -139,8 +140,8 @@ public class CustomCalendarView extends LinearLayout {
 
                     @Override
                     public void onClick(View v) {
-                            view.setBackgroundColor(getContext().getResources().getColor(R.color.purple_200));
-                        color[0] = "200";
+                            view.setBackgroundColor(getContext().getResources().getColor(R.color.blue));
+                        color[0] = "sad";
                         SaveMood(color[0], date,month,year);
                         //alertDialog.dismiss();
                         SetUpCalendar();
@@ -151,8 +152,8 @@ public class CustomCalendarView extends LinearLayout {
 
                     @Override
                     public void onClick(View v) {
-                            view.setBackgroundColor(getContext().getResources().getColor(R.color.purple_700));
-                        color[0] = "700";
+                            view.setBackgroundColor(getContext().getResources().getColor(R.color.red));
+                        color[0] = "angry";
                         SaveMood(color[0], date,month,year);
                        // alertDialog.dismiss();
                         SetUpCalendar();
@@ -178,17 +179,34 @@ public class CustomCalendarView extends LinearLayout {
                         View addView = LayoutInflater.from(parent.getContext()).inflate(R.layout.note,null);
                         EditText addNote=addView.findViewById(R.id.textnote);
                         Button saveNote= addView.findViewById(R.id.savenote);
+                        ImageButton deletenote=addView.findViewById(R.id.deleteBtn);
+
+                        if (CheckNullNote(date)){
+                            addNote.setText(KnowNote(date));
+                        }else{
+
+                            addNote.setHint("Добавь заметку");
+                        }
+                        deletenote.setOnClickListener(new OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                DeleteNote(date);
+                                addNote.setText(KnowNote(date));
+                            }
+                        });
 
                         saveNote.setOnClickListener(new OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                color[0]=KnowColor(date);
-                                Savenote(color[0],date,month, year,addNote.getText().toString() );
-                                Log.i("note",addNote.getText().toString()+"");
-                                alertDialog.dismiss();
-                                addnote.setText("Изменить заметку");
-                                textView.setVisibility(VISIBLE);
-                                textView.setText(GetNote(date));
+                                    color[0] = KnowColor(date);
+                                    Savenote(color[0], date, month, year, addNote.getText().toString());
+
+                                    Log.i("note", addNote.getText().toString() + "");
+                                    alertDialog.dismiss();
+                                    addnote.setText("Изменить заметку");
+                                    textView.setVisibility(VISIBLE);
+                                    textView.setText(GetNote(date));
+
                             }
                         });
                         builder.setView(addView);
@@ -321,6 +339,35 @@ public class CustomCalendarView extends LinearLayout {
         }
         return strnote;
     }
+    private void DeleteNote(String date){
+        dbOpenHelper= new DBOpenHelper( context);
+        SQLiteDatabase database= dbOpenHelper.getWritableDatabase();
+        Cursor cursor1= database.query(DBStructure.EVENT_TABLE_NAME,null,null,null,null,null,null);
+        ContentValues contentValues=new ContentValues();
+        if (cursor1.moveToFirst()){
+            int indexid = cursor1.getColumnIndex(DBStructure.ID);
+            int indexmood = cursor1.getColumnIndex(DBStructure.EVENT);
+            int indexdate = cursor1.getColumnIndex(DBStructure.DATE);
+            int indexmonth = cursor1.getColumnIndex(DBStructure.MONTH);
+            int indexyear = cursor1.getColumnIndex(DBStructure.YEAR);
+            int indexnote = cursor1.getColumnIndex(DBStructure.NOTE);
+            do {
+
+                String date1=cursor1.getString(indexdate) ;
+                String id1=cursor1.getString(indexid);
+                if (date1.equals(date)){
+                            contentValues.put(DBStructure.DATE,cursor1.getString(indexdate));
+                            contentValues.put(DBStructure.MONTH,cursor1.getString(indexmonth));
+                            contentValues.put(DBStructure.YEAR,cursor1.getString(indexyear));
+                            contentValues.put(DBStructure.EVENT,cursor1.getString(indexmood));
+                            long status = database.insert(DBStructure.EVENT_TABLE_NAME,null,contentValues);
+                            long status1= database.delete(DBStructure.EVENT_TABLE_NAME,DBStructure.ID + " = ?",new String[]{id1});
+                }
+            }while(cursor1.moveToNext());
+        }
+        cursor1.close();
+        dbOpenHelper.close();
+    }
     private  void CheckRecords(){
         dbOpenHelper= new DBOpenHelper( context);
         SQLiteDatabase database= dbOpenHelper.getWritableDatabase();
@@ -347,7 +394,7 @@ public class CustomCalendarView extends LinearLayout {
                         ContentValues contentValues1= new ContentValues();
                         if (date1.equals(date2)&& !(id1.equals(id2))){
                             if (Integer.parseInt(id1)>Integer.parseInt(id2)){
-                                if(note2!=null &note1==null){
+                                if(note2!=null & note1==null){
                                     contentValues.put(DBStructure.NOTE,note2);
                                     contentValues.put(DBStructure.DATE,cursor1.getString(indexdate));
                                     contentValues.put(DBStructure.MONTH,cursor1.getString(indexmonth));
@@ -361,7 +408,7 @@ public class CustomCalendarView extends LinearLayout {
                                 //Log.i("id1>id2","delete "+id2);
                             }
                             if (Integer.parseInt(id1)<Integer.parseInt(id2)){
-                                if(note1!=null &note2==null){
+                                if(note1!=null & note2==null ){
                                     contentValues.put(DBStructure.NOTE,note1);
                                     contentValues.put(DBStructure.DATE,cursor2.getString(indexdate));
                                     contentValues.put(DBStructure.MONTH,cursor2.getString(indexmonth));
@@ -404,6 +451,24 @@ public class CustomCalendarView extends LinearLayout {
         }
         return color;
     }
+    private String KnowNote(String date) {
+        dbOpenHelper= new DBOpenHelper( context);
+        SQLiteDatabase database= dbOpenHelper.getWritableDatabase();
+        Cursor cursor1= database.query(DBStructure.EVENT_TABLE_NAME,null,null,null,null,null,null);
+        String note="";
+        if (cursor1.moveToLast()) {
+            int indexnote = cursor1.getColumnIndex(DBStructure.NOTE);
+            int indexdate = cursor1.getColumnIndex(DBStructure.DATE);
+            do{
+                String date1=cursor1.getString(indexdate);
+                if (date.equals(date1)){
+                    note=cursor1.getString(indexnote);
+                    break;
+                }
+            }while(cursor1.moveToPrevious());
+        }
+        return note;
+    }
 
     private void DeleteMood(String date){
         dbOpenHelper= new DBOpenHelper(context);
@@ -425,24 +490,24 @@ public class CustomCalendarView extends LinearLayout {
          dbOpenHelper= new DBOpenHelper( context);
          SQLiteDatabase database= dbOpenHelper.getReadableDatabase();
          Cursor cursor= database.query(DBStructure.EVENT_TABLE_NAME,null,null,null,null,null,null);
-         int m500=0;
-         int m200=0;
-         int m700=0;
+         int mglad=0;
+         int msad=0;
+         int mangry=0;
          if (cursor.moveToFirst()){
              do {
                  String mood= cursor.getString(cursor.getColumnIndex(DBStructure.EVENT)) ;
                  String month= cursor.getString(cursor.getColumnIndex(DBStructure.MONTH)) ;
                  if (month.equals(Month)){
                      switch (mood){
-                         case"500": m500++;break;
-                         case"700": m700++;break;
-                         case"200": m200++;break;
+                         case"glad": mglad++;break;
+                         case"angry": mangry++;break;
+                         case"sad": msad++;break;
                      }
                  }
 
              }while(cursor.moveToNext());
          }
-         String text = "Mood 1="+Integer.toString(m500)+"  "+"Mood 2="+Integer.toString(m200)+"  "+"Mood 3="+Integer.toString(m700);
+         String text = "Mood 1="+Integer.toString(mglad)+"  "+"Mood 2="+Integer.toString(msad)+"  "+"Mood 3="+Integer.toString(mangry);
          //countMood.setText(text);
          cursor.close();
          dbOpenHelper.close();
@@ -455,7 +520,7 @@ public class CustomCalendarView extends LinearLayout {
         PreviousButton = view.findViewById(R.id.previousBtn);
         CurrentDate= view.findViewById(R.id.current_Date);
         gridView = view.findViewById(R.id.gridview);
-        DeleteButton = view.findViewById(R.id.deleteall);
+        //DeleteButton = view.findViewById(R.id.deleteall);
 
     }
     private void SetUpCalendar () {

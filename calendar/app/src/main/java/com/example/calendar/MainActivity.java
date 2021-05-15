@@ -3,15 +3,19 @@ package com.example.calendar;
 import androidx.annotation.ColorRes;
 import androidx.annotation.LayoutRes;
 import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.AlertDialog;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
@@ -27,14 +31,13 @@ public class MainActivity extends AppCompatActivity {
     CustomCalendarView customCalendarView;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         Button calendar = findViewById(R.id.calendarbutton);
-        Button piechart = findViewById(R.id.piechartbutton);
+        //Button piechart = findViewById(R.id.piechartbutton);
+
         calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,13 +46,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        piechart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                    Intent intent = new Intent(MainActivity.this, PPieCChart.class);
-                    startActivity(intent);
-            }
-        });
+
+//        piechart.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                    Intent intent = new Intent(MainActivity.this, PPieCChart.class);
+//                    startActivity(intent);
+//            }
+//        });
     }
 
 }

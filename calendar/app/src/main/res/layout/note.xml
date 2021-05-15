@@ -6,17 +6,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageButton
+        android:id="@+id/deleteBtn"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_margin="10dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="12dp"
+        android:background="@mipmap/krestik"
+        android:contentDescription="@string/todo"
+        app:layout_constraintBottom_toTopOf="@+id/savenote"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
         android:id="@+id/textnote"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_width="371dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
         android:autofillHints=""
-        android:hint="Заметка"
-        android:inputType="textLongMessage"
+        android:hint="@string/zametka"
+        android:inputType="textMultiLine"
+
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/savenote"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

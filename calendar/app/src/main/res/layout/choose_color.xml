@@ -8,7 +8,7 @@
 
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/glad"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/glad"
@@ -16,7 +16,7 @@
         app:backgroundTint="@color/yellow" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/sad"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/sad"
@@ -24,7 +24,7 @@
         app:backgroundTint="@color/blue" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/angry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/angry"

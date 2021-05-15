@@ -25,5 +25,15 @@
     <string name="deleterus">Удалить</string>
     <string name="add_note_rus">Добавить заметку</string>
     <string name="saverus">Сохранить</string>
+    <string name="mood_note">MOOD NOTE</string>
+    <string name="mon_rus">Пн</string>
+    <string name="wed_rus">Ср</string>
+    <string name="tue_rus">Вт</string>
+    <string name="thu_rus">Чт</string>
+    <string name="fri_rus">Пт</string>
+    <string name="sat_rus">Сб</string>
+    <string name="sun_rus">Вс</string>
+    <string name="deleteall_rus">Удалить все</string>
+    <string name="zametka">Заметка</string>
 
 </resources>

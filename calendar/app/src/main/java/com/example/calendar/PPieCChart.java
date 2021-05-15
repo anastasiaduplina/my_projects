@@ -127,6 +127,7 @@ public class PPieCChart extends MainActivity {
         data.setValueTextSize(15f);
         data.setValueTextColor(Color.BLACK);
         pieChart.setData(data);
+
         pieChart.invalidate();
         pieChart.animate();
     }
@@ -142,9 +143,9 @@ public class PPieCChart extends MainActivity {
                 String year= cursor.getString(cursor.getColumnIndex(DBStructure.YEAR)) ;
                 if (month.equals(Month) &&year.equals(Year)){
                     switch (mood){
-                        case"500": m500++; break;
-                        case"700": m700++; break;
-                        case"200": m200++; break;
+                        case"glad": m500++; break;
+                        case"angry": m700++; break;
+                        case"sad": m200++; break;
                     }
                 }
 
