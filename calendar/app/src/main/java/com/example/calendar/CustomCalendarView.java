@@ -105,9 +105,11 @@ public class CustomCalendarView extends LinearLayout {
                 AlertDialog.Builder builder= new AlertDialog.Builder(context);
                 builder.setCancelable(true);
                 View addView = LayoutInflater.from(parent.getContext()).inflate(R.layout.choose_color,null);
-                Button one= addView.findViewById(R.id.glad);
-                Button two= addView.findViewById(R.id.sad);
-                Button tree= addView.findViewById(R.id.angry);
+                Button glad= addView.findViewById(R.id.glad);
+                Button sad= addView.findViewById(R.id.sad);
+                Button angry= addView.findViewById(R.id.angry);
+                Button wonderful= addView.findViewById(R.id.wonderful);
+                Button awful= addView.findViewById(R.id.awful);
                 Button delete= addView.findViewById(R.id.deleteall);
                 Button addnote= addView.findViewById(R.id.add_note);
                 TextView textView= addView.findViewById(R.id.textView);
@@ -124,7 +126,7 @@ public class CustomCalendarView extends LinearLayout {
                     addnote.setText("Добавить заметку");
                     textView.setVisibility(INVISIBLE);
                 }
-                one.setOnClickListener(new OnClickListener() {
+                glad.setOnClickListener(new OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
@@ -136,7 +138,31 @@ public class CustomCalendarView extends LinearLayout {
                         CountMood(month);
                     }
                 });
-                two.setOnClickListener(new OnClickListener() {
+                wonderful.setOnClickListener(new OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        view.setBackgroundColor(getContext().getResources().getColor(R.color.yellow));
+                        color[0] = "wonderful";
+                        SaveMood(color[0], date,month,year);
+                        //alertDialog.dismiss();
+                        SetUpCalendar();
+                        CountMood(month);
+                    }
+                });
+                awful.setOnClickListener(new OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        view.setBackgroundColor(getContext().getResources().getColor(R.color.yellow));
+                        color[0] = "awful";
+                        SaveMood(color[0], date,month,year);
+                        //alertDialog.dismiss();
+                        SetUpCalendar();
+                        CountMood(month);
+                    }
+                });
+                sad.setOnClickListener(new OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
@@ -148,7 +174,7 @@ public class CustomCalendarView extends LinearLayout {
                         CountMood(month);
                     }
                 });
-                tree.setOnClickListener(new OnClickListener() {
+                angry.setOnClickListener(new OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
@@ -493,6 +519,8 @@ public class CustomCalendarView extends LinearLayout {
          int mglad=0;
          int msad=0;
          int mangry=0;
+         int mawful=0;
+         int mwonderful=0;
          if (cursor.moveToFirst()){
              do {
                  String mood= cursor.getString(cursor.getColumnIndex(DBStructure.EVENT)) ;
@@ -502,13 +530,16 @@ public class CustomCalendarView extends LinearLayout {
                          case"glad": mglad++;break;
                          case"angry": mangry++;break;
                          case"sad": msad++;break;
+                         case"awful": mawful++;break;
+                         case"wonderful": mwonderful++;break;
                      }
                  }
 
              }while(cursor.moveToNext());
          }
-         String text = "Mood 1="+Integer.toString(mglad)+"  "+"Mood 2="+Integer.toString(msad)+"  "+"Mood 3="+Integer.toString(mangry);
+         String text = "glad="+Integer.toString(mglad)+"  "+"sad="+Integer.toString(msad)+"  "+"angry="+Integer.toString(mangry)+"  "+"awful="+Integer.toString(mawful)+"  "+"wonderful="+Integer.toString(mwonderful);
          //countMood.setText(text);
+         Log.i("mood",text);
          cursor.close();
          dbOpenHelper.close();
      }

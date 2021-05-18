@@ -35,5 +35,7 @@
     <string name="sun_rus">Вс</string>
     <string name="deleteall_rus">Удалить все</string>
     <string name="zametka">Заметка</string>
+    <string name="wonderful_rus">Прекрасное</string>
+    <string name="awful_rus">Ужасное</string>
 
 </resources>

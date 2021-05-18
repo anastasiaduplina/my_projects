@@ -40,14 +40,16 @@ public class PPieCChart extends MainActivity {
     Calendar calendarday=Calendar.getInstance(Locale.ENGLISH);
     SimpleDateFormat monthFormat = new SimpleDateFormat("MMMM", Locale.ENGLISH);
     SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy",Locale.ENGLISH);
-    int m500=0;
-    int m200=0;
-    int m700=0;
+    int mglad=0;
+    int msad=0;
+    int mangry=0;
+    int mawful=0;
+    int mwonderful=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context=getApplicationContext();
+        context= getApplicationContext();
         setContentView(R.layout.piechart);
         Button calendar = findViewById(R.id.calendarbutton);
         Button piechart = findViewById(R.id.piechartbutton);
@@ -98,11 +100,13 @@ public class PPieCChart extends MainActivity {
 
     }
     public void SetPieChart (String month, String year,TextView text){
-        m500=0;
-        m200=0;
-        m700=0;
+        mglad=0;
+        msad=0;
+        mangry=0;
+        mawful=0;
+        mwonderful=0;
         CountMood(month,year);
-        if(m500+m200+m700==0){
+        if(mglad+msad+mangry==0){
             text.setText("Нет данных");
         } else{
             text.setText("");
@@ -110,9 +114,11 @@ public class PPieCChart extends MainActivity {
         pieChart=findViewById(R.id.piechart);
         ArrayList<PieEntry> entries = new ArrayList<>();
         ArrayList<Integer> colors = new ArrayList<>();
-        if(m500!=0){ entries.add(new PieEntry(m500, "Веселое"));colors.add(0xFFdbcea4);}
-        if(m200!=0){entries.add(new PieEntry(m200, "Грустное"));colors.add(0xFF97a5c9);}
-        if(m700!=0){entries.add(new PieEntry(m700, "Злое"));colors.add(0xFFc98383);}
+        if(mglad!=0){ entries.add(new PieEntry(mglad, "Веселое"));colors.add(0xFFdbcea4);}
+        if(msad!=0){entries.add(new PieEntry(msad, "Грустное"));colors.add(0xFF97a5c9);}
+        if(mangry!=0){entries.add(new PieEntry(mangry, "Злое"));colors.add(0xFFc98383);}
+        if(mawful!=0){entries.add(new PieEntry(mawful, "Ужасное"));colors.add(0xFF9fd4a9);}
+        if(mwonderful!=0){entries.add(new PieEntry(mwonderful, "Прекрасное"));colors.add(0xFFffbadf);}
 
         PieDataSet dataSet = new PieDataSet(entries, "  Настроение");
 
@@ -143,9 +149,11 @@ public class PPieCChart extends MainActivity {
                 String year= cursor.getString(cursor.getColumnIndex(DBStructure.YEAR)) ;
                 if (month.equals(Month) &&year.equals(Year)){
                     switch (mood){
-                        case"glad": m500++; break;
-                        case"angry": m700++; break;
-                        case"sad": m200++; break;
+                        case"glad": mglad++; break;
+                        case"angry": mangry++; break;
+                        case"sad": msad++; break;
+                        case"awful": mawful++;break;
+                        case"wonderful": mwonderful++;break;
                     }
                 }
 

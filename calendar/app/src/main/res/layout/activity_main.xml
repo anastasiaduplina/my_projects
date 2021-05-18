@@ -62,7 +62,7 @@
         android:layout_width="296dp"
         android:layout_height="222dp"
         android:text="@string/mood_note"
-
+        android:textColor="@color/brown"
         android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

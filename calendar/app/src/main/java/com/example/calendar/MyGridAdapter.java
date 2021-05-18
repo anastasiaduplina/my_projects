@@ -108,6 +108,12 @@ public class MyGridAdapter extends ArrayAdapter {
                 if (dday[3].equals("sad")) {
                     view.setBackgroundColor(getContext().getResources().getColor(R.color.blue));
                 }
+                if (dday[3].equals("awful")) {
+                    view.setBackgroundColor(getContext().getResources().getColor(R.color.greenmood));
+                }
+                if (dday[3].equals("wonderful")) {
+                    view.setBackgroundColor(getContext().getResources().getColor(R.color.pink));
+                }
             }
         }
         if (displayMonth == currentMonth && displayYear==currentYear){

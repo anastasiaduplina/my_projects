@@ -8,6 +8,20 @@
 
 
     <Button
+        android:id="@+id/wonderful"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/wonderful_rus"
+        android:textColor="@color/black"
+        app:backgroundTint="@color/pink" />
+    <Button
+        android:id="@+id/angry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/angry"
+        android:textColor="@color/black"
+        app:backgroundTint="@color/red" />
+    <Button
         android:id="@+id/glad"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,13 +37,14 @@
         android:textColor="@color/black"
         app:backgroundTint="@color/blue" />
 
+
     <Button
-        android:id="@+id/angry"
+        android:id="@+id/awful"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/angry"
+        android:text="@string/awful_rus"
         android:textColor="@color/black"
-        app:backgroundTint="@color/red" />
+        app:backgroundTint="@color/greenmood" />
 
 
     <Button
