@@ -37,5 +37,13 @@
     <string name="zametka">Заметка</string>
     <string name="wonderful_rus">Прекрасное</string>
     <string name="awful_rus">Ужасное</string>
+    <string-array name="motivs">
+        <item name="1">Ты все сможешь!</item>
+        <item name="2">Удачного дня!</item>
+        <item name="3">Ты можешь многое!</item>
+        <item name="4">Какой у тебя сегодня был день?</item>
+        <item name="5">Ты в порядке?</item>
+        <item name="6">Ты солнышко!</item>
+    </string-array>
 
 </resources>

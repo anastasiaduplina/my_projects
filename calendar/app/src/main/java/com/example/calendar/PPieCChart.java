@@ -45,6 +45,7 @@ public class PPieCChart extends MainActivity {
     int mangry=0;
     int mawful=0;
     int mwonderful=0;
+    int allmood=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,26 +115,22 @@ public class PPieCChart extends MainActivity {
         pieChart=findViewById(R.id.piechart);
         ArrayList<PieEntry> entries = new ArrayList<>();
         ArrayList<Integer> colors = new ArrayList<>();
-        if(mglad!=0){ entries.add(new PieEntry(mglad, "Веселое"));colors.add(0xFFdbcea4);}
-        if(msad!=0){entries.add(new PieEntry(msad, "Грустное"));colors.add(0xFF97a5c9);}
-        if(mangry!=0){entries.add(new PieEntry(mangry, "Злое"));colors.add(0xFFc98383);}
-        if(mawful!=0){entries.add(new PieEntry(mawful, "Ужасное"));colors.add(0xFF9fd4a9);}
-        if(mwonderful!=0){entries.add(new PieEntry(mwonderful, "Прекрасное"));colors.add(0xFFffbadf);}
+        allmood=mglad+ msad+ mangry +mawful+mwonderful;
+        if(mglad!=0){ entries.add(new PieEntry(mglad , "Веселое"));colors.add(R.color.yellow);}
+        if(msad!=0){entries.add(new PieEntry(msad, "Грустное"));colors.add(R.color.blue);}
+        if(mangry!=0){entries.add(new PieEntry(mangry, "Злое"));colors.add(R.color.red);}
+        if(mawful!=0){entries.add(new PieEntry(mawful, "Ужасное"));colors.add(R.color.greenmood);}
+        if(mwonderful!=0){entries.add(new PieEntry(mwonderful, "Прекрасное"));colors.add(R.color.pink);}
 
         PieDataSet dataSet = new PieDataSet(entries, "  Настроение");
-
-
-
-
-
         dataSet.setColors(colors);
-        //dataSet.setGradientColor(0xff0000ff,0xffffff00);
         PieData data= new PieData(dataSet);
-       // data.setHighlightEnabled(true);
+
         data.setValueTextSize(15f);
         data.setValueTextColor(Color.BLACK);
-        pieChart.setData(data);
 
+        pieChart.setData(data);
+        pieChart.setUsePercentValues(true);
         pieChart.invalidate();
         pieChart.animate();
     }

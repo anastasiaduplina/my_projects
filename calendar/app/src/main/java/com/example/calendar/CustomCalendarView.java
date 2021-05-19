@@ -61,8 +61,6 @@ public class CustomCalendarView extends LinearLayout {
     public static DBOpenHelper dbOpenHelper;
 
 
-
-
 //    public CustomCalendarView(Context context) {
 //        super(context);
 //    }
@@ -216,8 +214,11 @@ public class CustomCalendarView extends LinearLayout {
                         deletenote.setOnClickListener(new OnClickListener() {
                             @Override
                             public void onClick(View v) {
+                                //Log.i("delete","yes");
                                 DeleteNote(date);
                                 addNote.setText(KnowNote(date));
+                                addnote.setText("Добавить заметку");
+                                textView.setText(GetNote(date));
                             }
                         });
 
@@ -227,7 +228,7 @@ public class CustomCalendarView extends LinearLayout {
                                     color[0] = KnowColor(date);
                                     Savenote(color[0], date, month, year, addNote.getText().toString());
 
-                                    Log.i("note", addNote.getText().toString() + "");
+                                    //Log.i("note", addNote.getText().toString() + "");
                                     alertDialog.dismiss();
                                     addnote.setText("Изменить заметку");
                                     textView.setVisibility(VISIBLE);
@@ -451,8 +452,7 @@ public class CustomCalendarView extends LinearLayout {
 
                     }while(cursor2.moveToNext());
                 }
-                Log.i("id:","id:" +cursor1.getString(indexid)+ " mood:"+cursor1.getString(indexmood)+ " date:" +cursor1.getString(indexdate)
-                        +" month:"+cursor1.getString(indexmonth)+ " year:"+cursor1.getString(indexyear)+ " note:"+cursor1.getString(indexnote) );
+                Log.i("id:","id:" +cursor1.getString(indexid)+ " mood:"+cursor1.getString(indexmood)+ " date:" +cursor1.getString(indexdate) +" month:"+cursor1.getString(indexmonth)+ " year:"+cursor1.getString(indexyear)+ " note:"+cursor1.getString(indexnote) );
             }while(cursor1.moveToNext());
         }
 
@@ -537,9 +537,9 @@ public class CustomCalendarView extends LinearLayout {
 
              }while(cursor.moveToNext());
          }
-         String text = "glad="+Integer.toString(mglad)+"  "+"sad="+Integer.toString(msad)+"  "+"angry="+Integer.toString(mangry)+"  "+"awful="+Integer.toString(mawful)+"  "+"wonderful="+Integer.toString(mwonderful);
+         //String text = "glad="+Integer.toString(mglad)+"  "+"sad="+Integer.toString(msad)+"  "+"angry="+Integer.toString(mangry)+"  "+"awful="+Integer.toString(mawful)+"  "+"wonderful="+Integer.toString(mwonderful);
          //countMood.setText(text);
-         Log.i("mood",text);
+         //Log.i("mood",text);
          cursor.close();
          dbOpenHelper.close();
      }
