@@ -16,11 +16,11 @@ public class CustomCalendar extends MainActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context=getBaseContext();
         setContentView(R.layout.custom_calendar);
         Button calendar = findViewById(R.id.calendarbutton);
         Button piechart = findViewById(R.id.piechartbutton);
         //ImageButton settings= findViewById(R.id.settingBtn);
+        context=getBaseContext();
         calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

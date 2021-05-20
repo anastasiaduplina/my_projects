@@ -106,7 +106,7 @@ public class PPieCChart extends MainActivity {
         mawful=0;
         mwonderful=0;
         CountMood(month,year);
-        if(mglad+msad+mangry==0){
+        if(mglad+msad+mangry+ mawful+mwonderful==0){
             text.setText("Нет данных");
         } else{
             text.setText("");

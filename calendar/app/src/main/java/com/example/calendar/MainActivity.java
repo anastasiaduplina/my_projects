@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //customCalendarView= (CustomCalendarView)findViewById(R.id.custom_calendar_view);
+                customCalendarView= (CustomCalendarView)findViewById(R.id.custom_calendar_view);
                 Intent intent = new Intent(MainActivity.this, CustomCalendar.class);
                 startActivity(intent);
             }

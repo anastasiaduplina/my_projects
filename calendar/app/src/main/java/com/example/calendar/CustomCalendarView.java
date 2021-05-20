@@ -590,21 +590,21 @@ public class CustomCalendarView extends LinearLayout {
         return days;
     }
     private void CollectEventsPerMonth (String Month, String year){
-        eventsList.clear();
-        DBOpenHelper dbOpenHelper= new DBOpenHelper(context);
-        SQLiteDatabase database = dbOpenHelper.getReadableDatabase();
-        Cursor cursor = dbOpenHelper.ReadEventsperMonth(Month, year, database);
-        while( cursor.moveToNext()){
-            String event = cursor.getString(cursor.getColumnIndex(DBStructure.EVENT));
-
-            String date = cursor.getString(cursor.getColumnIndex(DBStructure.DATE));
-            String month = cursor.getString(cursor.getColumnIndex(DBStructure.MONTH));
-            String Year = cursor.getString(cursor.getColumnIndex(DBStructure.YEAR));
-            Events events = new Events(event, date,month,Year);
-            eventsList.add(events);
-        }
-        cursor.close();
-        dbOpenHelper.close();
+//        eventsList.clear();
+//        DBOpenHelper dbOpenHelper= new DBOpenHelper(context);
+//        SQLiteDatabase database = dbOpenHelper.getReadableDatabase();
+//        Cursor cursor = dbOpenHelper.ReadEventsperMonth(Month, year, database);
+//        while( cursor.moveToNext()){
+//            String event = cursor.getString(cursor.getColumnIndex(DBStructure.EVENT));
+//
+//            String date = cursor.getString(cursor.getColumnIndex(DBStructure.DATE));
+//            String month = cursor.getString(cursor.getColumnIndex(DBStructure.MONTH));
+//            String Year = cursor.getString(cursor.getColumnIndex(DBStructure.YEAR));
+//            Events events = new Events(event, date,month,Year);
+//            eventsList.add(events);
+//        }
+//        cursor.close();
+//        dbOpenHelper.close();
     }
 
 

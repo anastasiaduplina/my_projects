@@ -9,7 +9,6 @@ public class NoteAdd extends MainActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.note);
     }
-    public void Create(){
-        setContentView(R.layout.note);
-    }
+
+
 }
