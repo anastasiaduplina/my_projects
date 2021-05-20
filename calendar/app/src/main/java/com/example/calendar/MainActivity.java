@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
@@ -37,7 +38,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Button calendar = findViewById(R.id.calendarbutton);
         //Button piechart = findViewById(R.id.piechartbutton);
+        TextView motiv= findViewById(R.id.textmotivation);
+        //String[] motivs= new String[]{"Ты все сможешь!","Удачного дня!","Ты можешь многое!","Какой у тебя сегодня был день?","Ты в порядке?","Ты солнышко!"};
+        double ranmotiv=Math.random()*5;
 
+        String[]motivs=getResources().getStringArray(R.array.motivs);
+        String text=motivs[(int)ranmotiv];
+        motiv.setText(text);
         calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
