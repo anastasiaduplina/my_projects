@@ -116,11 +116,11 @@ public class PPieCChart extends MainActivity {
         ArrayList<PieEntry> entries = new ArrayList<>();
         ArrayList<Integer> colors = new ArrayList<>();
         allmood=mglad+ msad+ mangry +mawful+mwonderful;
-        if(mglad!=0){ entries.add(new PieEntry(mglad , "Веселое"));colors.add(R.color.yellow);}
-        if(msad!=0){entries.add(new PieEntry(msad, "Грустное"));colors.add(R.color.blue);}
-        if(mangry!=0){entries.add(new PieEntry(mangry, "Злое"));colors.add(R.color.red);}
-        if(mawful!=0){entries.add(new PieEntry(mawful, "Ужасное"));colors.add(R.color.greenmood);}
-        if(mwonderful!=0){entries.add(new PieEntry(mwonderful, "Прекрасное"));colors.add(R.color.pink);}
+        if(mglad!=0){ entries.add(new PieEntry(mglad , "Веселое"));colors.add(Color.parseColor("#ffedb3"));}
+        if(msad!=0){entries.add(new PieEntry(msad, "Грустное"));colors.add(Color.parseColor("#a7bffc"));}
+        if(mangry!=0){entries.add(new PieEntry(mangry, "Злое"));colors.add(Color.parseColor("#fca4a4"));}
+        if(mawful!=0){entries.add(new PieEntry(mawful, "Ужасное"));colors.add(Color.parseColor("#9fd4a9"));}
+        if(mwonderful!=0){entries.add(new PieEntry(mwonderful, "Прекрасное"));colors.add(Color.parseColor("#ffbadf"));}
 
         PieDataSet dataSet = new PieDataSet(entries, "  Настроение");
         dataSet.setColors(colors);
